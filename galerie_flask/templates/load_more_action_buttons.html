@@ -1,0 +1,16 @@
+{% if not items %}
+<div
+    class="button-container"
+    id="buttons"
+    hx-swap-oob="true"
+>
+    <button
+        class="button"
+        hx-confirm="{{ _('Are you sure you want to mark this group as read?') }}"
+        hx-post="/actions/mark_as_read?to_iid={{ to_iid }}&group={{ gid }}&sort={{ sort }}"
+        hx-disabled-elt="this"
+    >{{ _('Mark as read') }} <span class="htmx-indicator">...</span></button>
+</div>
+{% else %}
+{% include 'grid_end_buttons.html' %}
+{% endif %}

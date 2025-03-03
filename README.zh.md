@@ -4,29 +4,31 @@
 [![zh](https://img.shields.io/badge/docker-amd64-orange)](https://github.com/sekai-soft/galerie/pkgs/container/galerie)
 [![zh](https://img.shields.io/badge/docker-arm64-teal)](https://github.com/sekai-soft/galerie/pkgs/container/galerie)
 
-<img src="./screenshot.png" alt="程序截图" width="768"/>
+<img src="./screenshot.zh.png" alt="程序截图" width="768"/>
 
 ## 功能
-* 支持与 Fever API 兼容的自托管 RSS 聚合器
-    * [Miniflux](https://miniflux.app/docs/fever.html)
-    * [FreshRSS](https://freshrss.github.io/FreshRSS/en/users/06_Mobile_access.html)
-    * [Tiny Tiny RSS (通过第三方插件)](https://github.com/DigitalDJ/tinytinyrss-fever-plugin)
-* 以照片墙形式查看未读 RSS 项目中的图片
-* 查看完成后将所有项目标记为已读
-* （可选）连接到 Pocket ，双击图片即可快速将项目添加至稍后阅读
+* 支持自托管的 [Miniflux](https://miniflux.app)
+* 以照片墙的形式从 RSS 源中浏览未读图片
+* 🚧 一边浏览图片一边将它们标记为已读
+* 🚧 快速将图片分享至 Mastodon
+* 快速将图片添加至 Pocket
 
-## 运行你自己的服务器
-Docker 镜像是 `ghcr.io/sekai-soft/galerie:latest` ，并且 x86-64 和 arm64 都可用
+## 托管实例
+访问 [galerie-reader.com](https://galerie-reader.com) 并登陆您的 RSS 聚合器
 
-以下是该容器接受的环境变量
-| 名称                  | 必要 | 评论                                                                          |
-| --------------------- | ---- | ----------------------------------------------------------------------------- |
-| `FEVER_ENDPOINT`      | 是   | Fever API 的 URL 节点。如果不确定，请查看 [Fever 节点示例](#fever-节点示例)。 |
-| `FEVER_USERNAME`      | 是   | Fever API 的用户名                                                            |
-| `FEVER_PASSWORD`      | 是   | Fever API 的密码                                                              |
-| `POCKET_CONSUMER_KEY` | 否   | 用于连接Pocket选项。查阅 ["连接 Pocket" 部分](#连接-pocket)。                 |
-| `POCKET_ACCESS_TOKEN` | 否   | 用于连接Pocket选项。查阅 ["连接 Pocket" 部分](#连接-pocket)。                 |
-| `PORT`                | 否   | 服务器绑定的端口。默认为 `5000`。                                             |
+## 自己运行服务器
+Docker 镜像是 `ghcr.io/sekai-soft/galerie:latest`，并且 x86-64 和 arm64 都可用
+
+Docker 镜像可以不接受任何环境变量。如果没有提供任何与 RSS 聚合器认证相关的环境变量，您需要在网页上使用您的 RSS 聚合器登录（就像托管实例一样）。
+
+以下是容器接受的环境变量表
+| 名称                  | 是否必需 | 备注                                                                                                                                        |
+| --------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MINIFLUX_ENDPOINT`   | 否       | 您的 Miniflux API 的 URL 端点。必须提供 `MINIFLUX_USERNAME` 和 `MINIFLUX_PASSWORD`。                                                        |
+| `MINIFLUX_USERNAME`   | 否       | 您的 Miniflux API 用户名                                                                                                                    |
+| `MINIFLUX_PASSWORD`   | 否       | 您的 Miniflux API 密码                                                                                                                      |
+| `POCKET_CONSUMER_KEY` | 否       | 可选连接到 Pocket。请参见 ["连接到 Pocket" 部分](#connect-to-pocket)。                                                                      |
+| `PORT`                | 否       | 服务器绑定的端口。默认为 `5000`。                                                                                                           |
 
 以下是 `docker-compose.yml` 文件示例
 ```yml
@@ -36,29 +38,20 @@ services:
         ports:
             - "5000:5000"
         environment:
-            - FEVER_ENDPOINT=http://miniflux/fever
-            - FEVER_USERNAME=miniflux
-            - FEVER_PASSWORD=test123
+            - MINIFLUX_ENDPOINT=http://miniflux
+            - MINIFLUX_USERNAME=miniflux
+            - MINIFLUX_PASSWORD=test123
             - POCKET_CONSUMER_KEY=
-            - POCKET_ACCESS_TOKEN=
         restart: unless-stopped
 ```
 
-### Fever 节点示例
-首先确保你已经给你的 RSS 聚合器设置过了 Fever API 兼容
-
-* [Miniflux](https://miniflux.app/docs/fever.html)
-* [FreshRSS](https://freshrss.github.io/FreshRSS/en/users/06_Mobile_access.html)
-* [Tiny Tiny RSS (通过第三方插件)](https://github.com/DigitalDJ/tinytinyrss-fever-plugin)
-
-以下是示例的 Fever API 节点
-* Miniflux: `https://miniflux.example.net/fever`
-* FreshRSS: `https://freshrss.example.net/api/fever.php`
-* Tiny Tiny RSS `https://tt-rss.example.net/tt-rss/plugins.local/fever/`
-
 ### 连接 Pocket
-1. 在 [这里](https://getpocket.com/developer/apps/new) 创建一个新的 Pocket 开发者应用
-    * 确保这个应用至少具有 "Add" 权限
-2. 前往 [My Apps](https://getpocket.com/developer/apps/) 并点击你刚刚创建的开发者应用
-3. 复制 Consumer Key。这将是你的 `POCKET_CONSUMER_KEY` 。
-4. 前往 [这个网站](https://reader.fxneumann.de/plugins/oneclickpocket/auth.php) 获取 Access token。这将是你的 `POCKET_ACCESS_TOKEN`。
+有三种方式可以连接到Pocket：
+
+* 在托管实例中，您可以用您的 Pocket 帐户登录。
+* 在自托管实例中，您可以创建自己的 Pocket Develoepr App 并通过 OAuth 给自己授权
+    1. 在[这里](https://getpocket.com/developer/apps/new)创建一个新的 Pocket Develoepr App
+        * 确保它至少具有 "Add" 权限
+    2. 访问[我的应用程序](https://getpocket.com/developer/apps/)并点击刚刚创建的 Develoepr App
+    3. 复制 Consumer Key。这将是您的`POCKET_CONSUMER_KEY`。
+    4. 在设置页面通过 OAuth 给自己授权

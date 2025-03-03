@@ -1,4 +1,5 @@
 import os
+import base64
 import sentry_sdk
 import click
 from dotenv import load_dotenv
@@ -19,6 +20,7 @@ def get_locale():
     return request.accept_languages.best_match(['en', 'zh']) 
 
 app = Flask(__name__, static_url_path='/static')
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config["BABEL_TRANSLATION_DIRECTORIES"] = os.path.join(
     os.path.abspath(os.path.dirname(__file__)),
     "galerie_flask",
@@ -61,3 +63,21 @@ def compile():
     """Compile all languages."""
     if os.system('pybabel compile -d galerie_flask/translations'):
         raise RuntimeError('compile command failed')
+
+
+def read_svg_as_base64(filepath):
+    with open(filepath, 'r') as file:
+        svg_content = file.read()
+    return base64.b64encode(svg_content.encode('utf-8')).decode('utf-8')
+
+
+image_loading_svg_base64 = read_svg_as_base64('static/image-loading.svg')
+image_error_svg_base64 = read_svg_as_base64('static/image-error.svg')
+
+
+@app.context_processor
+def inject_svg_base64():
+    return dict(
+        image_loading_svg_base64=image_loading_svg_base64,
+        image_error_svg_base64=image_error_svg_base64
+    )
