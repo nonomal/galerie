@@ -1,0 +1,329 @@
+/** sizes for > iPad **/
+input {
+    width: 75%;
+}
+
+.logo-image {
+    height: 2em;
+    width: auto;
+}
+
+.app {
+    width: 66%;
+    margin: 0 auto;
+}
+
+.grid-sizer, .grid-item {
+    width: calc((100% - 64px) / 3)
+}
+
+.grid-item .title {
+    font-size: 1em;
+    line-height: 2;
+}
+
+.grid-item .feed-title {
+    font-size: 0.75em;
+    line-height: 1.75;
+}
+
+.grid-item {
+    margin-bottom: 32px;
+}
+
+textarea {
+    font-size: 2em;
+    line-height: 1.5;
+}
+
+.button-with-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2em;
+}
+
+.share-menu-text {
+    font-size: 1em;
+    line-height: 1;
+}
+
+/** sizes for > iPhone 12 Pro Max <= iPad Pro **/
+@media screen and (max-width: 1024px) {
+    .logo-image {
+        height: 2em;
+        width: auto;
+    }
+
+    .app {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .grid-sizer, .grid-item {
+        width: calc((100% - 64px) / 3)
+    }
+
+    .grid-item .title {
+        font-size: 1em;
+        line-height: 2;
+    }
+    
+    .grid-item .feed-title {
+        font-size: 0.75em;
+        line-height: 1.75;
+    }
+    
+    .grid-item {
+        margin-bottom: 32px;
+    }
+
+    textarea {
+        font-size: 2em;
+        line-height: 1.5;
+    }
+
+    .button-with-links {
+        gap: 2em;
+    }
+
+    .share-menu-text {
+        font-size: 1em;
+        line-height: 2;
+    }
+}
+
+/** sizes for <= iPhone 14 Pro Max **/
+@media screen and (max-width: 430px) {
+    .logo-image {
+        height: 1em;
+        width: auto;
+    }
+
+    .app {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .grid-sizer, .grid-item {
+        width: calc((100% - 32px) / 2)
+    }
+
+    .grid-item .title {
+        font-size: 1em;
+        line-height: 2;
+    }
+    
+    .grid-item .feed-title {
+        font-size: 0.75em;
+        line-height: 1.75;
+    }
+    
+    .grid-item {
+        margin-bottom: 32px;
+    }
+
+    textarea {
+        font-size: 1em;
+        line-height: 1;
+    }
+
+    .button-with-links {
+        gap: 1em;
+    }
+
+    .share-menu-text {
+        font-size: 1.5em;
+        line-height: 2;
+    }
+}
+
+/* non-sizes */
+.app {
+    padding-bottom: env(safe-area-inset-bottom, 1em);
+}
+
+.item-image-container {
+    position: relative;
+}
+
+.item-image-overlay {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #F5F5F5;
+    padding: 4px 4px;
+    border-radius: 8px;
+    font-size: 0.75em;
+}
+
+.item-image {
+    width: 100%;
+    border-radius: 16px;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.item-image-contained {
+    height: 75vh;
+    object-fit: contain;
+    background-color: #F5F5F5;
+}
+
+.grid-item a {
+    text-decoration: none;
+    display: block;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+dialog {
+    background: #1A1A1A;
+    color: #F5F5F5;
+}
+
+.setup-code {
+    word-break: break-all;
+}
+
+textarea {
+    color: #F5F5F5;
+    border: none;
+    border-bottom: 2px solid #999999;
+    background-color: #1A1A1A;
+    resize: none;
+}
+
+.tag {
+    color: #CCCCCC;
+    background-color: #2E2E2E;
+    border: 1px solid #CCCCCC;
+    border-radius: 2px;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+
+.feeds {
+    margin: 0;
+}
+
+.feeds > a {
+    font-size: 1em;
+}
+
+.share-menu {
+    position: fixed;
+    margin: auto 0 0 0;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    padding: 0;
+    border: 0;
+    z-index: 1000;
+}
+
+.header-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1.5em;
+}
+
+.user-string-horizontal {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.item-share-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.item-share-button {
+    cursor: pointer;
+}
+
+/** htmx-indicator **/
+.htmx-indicator {
+    display:none;
+}
+
+.htmx-request .htmx-indicator {
+    display:inline;
+}
+
+.htmx-request.htmx-indicator {
+    display:inline;
+}
+
+/* The toast - position it at the bottom and in the middle of the screen */
+#toast {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    background-color: #F5F5F5;
+    color: #1A1A1A;
+    text-align: center; /* Centered text */
+    border-radius: 4px; /* Rounded borders */
+    font-size: 1em;
+    padding: 0.5em;
+    position: fixed; /* Sit on bottom of the screen */
+    z-index: 2000;
+
+    width: 25%;
+    bottom: 1em;
+    right: 1em;
+}
+
+/** sizes for > iPhone 12 Pro Max <= iPad Pro **/
+@media screen and (max-width: 1024px) {
+    #toast {
+        width: 50%;
+    }
+}
+
+/** sizes for <= iPhone 14 Pro Max **/
+@media screen and (max-width: 430px) {
+    #toast {
+        width: calc(100% - 3em);
+        bottom: 1em;
+        left: 1em;
+        right: 1em;
+    }
+}
+
+/* Show the toast when clicking on a button (class added with JavaScript) */
+#toast.show {
+    visibility: visible; /* Show the toast */
+    /* Add animation: Take 0.5 seconds to fade in and out the toast.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the toast in and out */
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 24px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 24px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 24px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 24px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}

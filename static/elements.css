@@ -1,0 +1,149 @@
+/** non sizes **/
+input {
+    color: #F5F5F5;
+    border: none;
+    border-bottom: 2px solid #999999;
+    background-color: #1A1A1A;
+}
+
+a {
+    color: #F5F5F5;
+}
+
+select {
+    color: #F5F5F5;
+    border: none;
+    background-color: #1A1A1A;
+    max-width: 75%;
+}
+
+.button {
+    color: #F5F5F5;
+    background-color: #1A1A1A;
+    border: 2px solid #F5F5F5;
+    border-radius: 4px;
+    padding: 0.5em;
+    cursor: pointer;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: horizontal;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    position: sticky;
+    top: 0;
+    background-color: #1A1A1A;
+    z-index: 1000;
+}
+
+.code-font {
+    font-family: 'Consolas', 'Menlo', monospace;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer > p {
+    font-size: 0.75em;
+}
+
+p > a {
+    font-size: 1em;
+}
+
+p > select {
+    font-size: 1em;
+}
+
+p > input {
+    font-size: 1em;
+}
+
+.all-read {
+    text-align: center;
+}
+
+/** sizes for > iPad **/
+p {
+    font-size: 2em;
+    line-height: 1.5;
+}
+
+input {
+    font-size: 2em;
+    line-height: 1.5;
+}
+
+a {
+    font-size: 2em;
+    line-height: 1.5;
+}
+
+select {
+    font-size: 2em;
+}
+
+.button {
+    font-size: 2em;
+}
+
+/** sizes for > iPhone 12 Pro Max <= iPad Pro **/
+@media screen and (max-width: 1024px) {
+    p {
+        font-size: 2em;
+        line-height: 1.5;
+    }
+
+    input {
+        font-size: 2em;
+        line-height: 1.5;
+    }
+
+    a {
+        font-size: 2em;
+        line-height: 1.5;
+    }
+
+    select {
+        font-size: 2em;
+    }
+
+    .button {
+        font-size: 2em;
+    }
+}
+
+/** sizes for <= iPhone 14 Pro Max **/
+@media screen and (max-width: 430px) {
+    p {
+        font-size: 1em;
+        line-height: 1;
+    }
+
+    input {
+        font-size: 1em;
+        line-height: 1;
+    }
+
+    a {
+        font-size: 1em;
+        line-height: 1;
+    }
+
+    select {
+        font-size: 1em;
+    }
+
+    .button {
+        font-size: 1em;
+    }
+}
